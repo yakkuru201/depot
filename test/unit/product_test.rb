@@ -5,18 +5,20 @@ class ProductTest < ActiveSupport::TestCase
     product = Product.new(
       title: "My book Title",
       description: "yyy",
-      image_url: "zzz.jpg"
+      price: 1,
+      image_url: image_url
     )
+  end
 
-    product.price = -1
-    assert product.invalid?
-    assert_equal "must be greater than or equal to 0.01", product.errors[price].join(';')
+test "image url"
+  ok = %w{ fred.gif fred.jpg fred.png FRED.JPG FRED.Jpg http://a.b.c/x/y/z/fred.gif.more }
+  bad = %w{ fred.doc fred.gif/more fred.gif.more }
 
-    product.price = 0
-    assert product.invalid?
-    assert_equal "must be greater than or equal to 0.01", product.errors[:price].join(';')
+  ok.each do |name|
+    assert new_product(name).valid?,
+  end
 
-    product.price = 1
-    assert product.valid?
+  bad.each do |name|
+    assert new_product(name).invalid?,
   end
 end
