@@ -6,6 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Product.delete_all
+
 Product.create(title: 'Programming Ruby 1.9',
   description:
     %{<p>
